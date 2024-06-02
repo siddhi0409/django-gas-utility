@@ -1,0 +1,11 @@
+<!-- This page is used by the user to track the Service request, to check if the request is resolved, cancled, in-progress. -->
+
+{% extends "base_generic.html" %}
+{% block content %}
+  <h2>Track Service Requests</h2>
+  <ul>
+    {% for request in requests %}
+      <li>{{ request.request_type }} - {{ request.status }} - {{ request.created_at|date:"Y-m-d H:i:s" }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
