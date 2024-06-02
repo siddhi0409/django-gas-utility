@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Gas Utility{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gas Utility</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'submit_request' %}">Submit Request</a></li>
+                    <li><a href="{% url 'track_requests' %}">Track Requests</a></li>
+                    <!-- <li><a href="{% url 'logout' %}">Logout</a></li> -->
+                    <li>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" style="background:none; border:none; color:white; cursor:pointer;">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <h4 style="align-items: center;">Welcome to Gas Utility Services!
+
+            At Gas Utility, we specialize in providing comprehensive gas solutions tailored to your needs. <br>
+            From installation to maintenance and repairs, we offer a wide range of services to ensure the safety, 
+             efficiency, and <br> reliability of your gas systems and appliances.
+            
+            Our team of certified technicians is dedicated to delivering top-notch service,<br> whether you're looking to 
+            set up new gas lines, schedule routine maintenance checks, or address emergency repairs. With a focus on safety
+            <br> and customer satisfaction, we strive to exceed your expectations and provide peace of mind when it comes to
+            <br> your gas utilities.
+            
+            Experience the convenience and expertise of Gas Utility Services. Contact us today to learn more about how we can
+            <br> meet your gas service needs.</h4>
+        {% endblock %}
+        
+    </main>
+    <footer>
+        <p>&copy; 2024 Gas Utility</p>
+    </footer>
+</body>
+</html>
